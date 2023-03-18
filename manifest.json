@@ -1,0 +1,9 @@
+{
+    "name": "Spell-check Add-on",
+    "description": "A spell-checking add-on for Anki using Quillbot.com",
+    "version": "1.0.0",
+    "author": "Your Name",
+    "hooks": [
+        {"point": "setupEditorButtons", "function": "spellcheck"}
+    ]
+}
