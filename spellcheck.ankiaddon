@@ -1,0 +1,25 @@
+from anki.hooks import addHook
+from aqt.editor import Editor
+
+from quillbot import check_spelling
+
+def spellcheck(editor):
+    # Get the text from the editor
+    text = editor.note.fields[editor.currentField]
+
+    # Spell-check the text using Quillbot
+    corrected_text = check_spelling(text)
+
+    # Replace the text in the editor with the corrected text
+    editor.note.fields[editor.currentField] = corrected_text
+    editor.loadNote()
+
+# Add the spellcheck function as a hook to the Anki editor
+addHook("setupEditorButtons", lambda buttons, editor: buttons.append(
+    editor.addButton(
+        icon="spell",
+        cmd="spellcheck",
+        func=lambda editor=editor: spellcheck(editor),
+        tip="Spell-check"
+    )
+))
